@@ -1,0 +1,786 @@
+/* ===================================================================
+   Ebbinghaus Review Plugin — styles.css
+   Uses Obsidian CSS variables for dark/light theme compatibility
+   =================================================================== */
+
+/* ── Root ─────────────────────────────────────────────────────────── */
+.eb-main-root {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-height: 0;
+	overflow-y: auto;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-family: var(--font-interface);
+	padding: 0 0 24px;
+}
+
+/* ── Header ───────────────────────────────────────────────────────── */
+.eb-main-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 20px 10px;
+	border-bottom: 1px solid var(--background-modifier-border);
+	gap: 12px;
+	flex-shrink: 0;
+}
+
+.eb-nav-group {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.eb-header-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	flex: 1;
+}
+
+.eb-header-title {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	text-align: center;
+}
+
+.eb-header-month {
+	margin: 0;
+	font-size: 1.4em;
+	font-weight: 800;
+	color: var(--text-normal);
+	letter-spacing: -0.5px;
+}
+
+.eb-today-badge {
+	background: #f59e0b;
+	color: #fff;
+	font-size: 0.76em;
+	font-weight: 700;
+	border-radius: 20px;
+	padding: 2px 12px;
+	white-space: nowrap;
+}
+
+/* ── View Mode Toggle ─────────────────────────────────────────────── */
+.eb-view-toggle {
+	display: flex;
+	background: var(--background-secondary);
+	border-radius: 8px;
+	padding: 3px;
+	gap: 2px;
+}
+
+.eb-toggle-btn {
+	border: none;
+	border-radius: 6px;
+	padding: 4px 14px;
+	font-size: 0.82em;
+	font-weight: 600;
+	cursor: pointer;
+	color: var(--text-muted);
+	background: transparent;
+	transition: background 0.15s, color 0.15s;
+}
+
+.eb-toggle-btn:hover {
+	color: var(--text-normal);
+	background: var(--background-modifier-hover);
+}
+
+.eb-toggle-btn-active {
+	background: var(--background-primary);
+	color: var(--interactive-accent);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Nav Buttons */
+.eb-btn {
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 0.88em;
+	padding: 6px 14px;
+	transition: background 0.15s, transform 0.1s;
+	font-weight: 600;
+}
+
+.eb-btn:active {
+	transform: scale(0.95);
+}
+
+.eb-btn-nav {
+	background: var(--background-modifier-hover);
+	color: var(--text-normal);
+	font-size: 1em;
+	padding: 6px 12px;
+}
+
+.eb-btn-nav:hover {
+	background: var(--background-modifier-border);
+}
+
+.eb-btn-today {
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+.eb-btn-today:hover {
+	background: var(--interactive-accent-hover);
+}
+
+/* ── Weekday Bar ──────────────────────────────────────────────────── */
+.eb-weekday-bar {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	padding: 8px 12px 4px;
+	flex-shrink: 0;
+}
+
+.eb-weekday-label {
+	text-align: center;
+	font-size: 0.78em;
+	font-weight: 700;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	padding: 4px 0;
+}
+
+/* ── Calendar Grid (Month) ────────────────────────────────────────── */
+.eb-cal-grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 4px;
+	padding: 4px 12px;
+	flex: 1;
+}
+
+/* ── Calendar Grid (Week) — taller cells ─────────────────────────── */
+.eb-cal-grid-week .eb-cell {
+	min-height: 220px;
+}
+
+/* ── Cell ─────────────────────────────────────────────────────────── */
+.eb-cell {
+	min-height: 120px;
+	border-radius: 10px;
+	border: 1px solid var(--background-modifier-border);
+	padding: 6px 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	background: var(--background-secondary);
+	transition: border-color 0.15s, box-shadow 0.15s;
+	overflow: hidden;
+}
+
+.eb-cell:hover {
+	border-color: var(--interactive-accent);
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--interactive-accent) 15%, transparent);
+}
+
+.eb-cell-filler {
+	min-height: 120px;
+	border-radius: 10px;
+	background: transparent;
+	border: 1px dashed color-mix(in srgb, var(--background-modifier-border) 40%, transparent);
+}
+
+.eb-cell-today {
+	border-color: var(--interactive-accent);
+	border-width: 2px;
+	background: color-mix(in srgb, var(--interactive-accent) 8%, var(--background-secondary));
+}
+
+/* Date number — clickable to drill into day view */
+.eb-cell-date-row {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 2px;
+}
+
+.eb-cell-date-num {
+	font-size: 0.9em;
+	font-weight: 600;
+	color: var(--text-muted);
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background 0.12s, color 0.12s;
+}
+
+.eb-cell-date-num:hover {
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+.eb-date-today {
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+/* ── Cell sections ────────────────────────────────────────────────── */
+.eb-cell-section {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.eb-cell-divider {
+	height: 1px;
+	background: var(--background-modifier-border);
+	margin: 3px 0;
+}
+
+.eb-cell-more {
+	font-size: 0.7em;
+	color: var(--text-faint);
+	font-style: italic;
+	padding-left: 2px;
+}
+
+/* ── Note items in cells ──────────────────────────────────────────── */
+.eb-cell-note {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	border-radius: 5px;
+	padding: 2px 5px;
+	min-width: 0;
+	transition: background 0.12s;
+}
+
+.eb-cell-note:hover {
+	background: var(--background-modifier-hover);
+}
+
+.eb-note-created {
+	border-left: 2px solid var(--color-blue);
+}
+
+.eb-note-review {
+	border-left: 2px solid #f59e0b;
+}
+
+.eb-note-overdue {
+	border-left: 2px solid var(--color-red);
+}
+
+/* Note name link */
+.eb-note-name {
+	font-size: 0.78em;
+	color: var(--text-accent);
+	text-decoration: none;
+	cursor: pointer;
+	flex: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-width: 0;
+}
+
+.eb-note-name:hover {
+	text-decoration: underline;
+}
+
+/* Review link: clicking opens AND auto-completes the review */
+.eb-review-link {
+	text-decoration-style: dashed;
+	text-decoration-line: underline;
+	text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.eb-review-link:hover {
+	text-decoration-style: solid;
+	text-decoration-color: currentColor;
+}
+
+/* Repetition badge */
+.eb-rep-badge {
+	background: #f59e0b;
+	color: #fff;
+	font-size: 0.65em;
+	font-weight: 700;
+	border-radius: 6px;
+	padding: 1px 5px;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.eb-rep-overdue {
+	background: var(--color-red);
+}
+
+/* ✓ Complete button */
+.eb-done-btn {
+	border: none;
+	border-radius: 5px;
+	background: color-mix(in srgb, var(--color-green) 15%, transparent);
+	color: var(--color-green);
+	font-size: 0.65em;
+	font-weight: 700;
+	padding: 2px 6px;
+	cursor: pointer;
+	white-space: nowrap;
+	flex-shrink: 0;
+	transition: background 0.15s, transform 0.1s;
+	line-height: 1.4;
+}
+
+.eb-done-btn:hover {
+	background: var(--color-green);
+	color: #fff;
+}
+
+.eb-done-btn:active {
+	transform: scale(0.92);
+}
+
+/* ✗ Never-review button (small, per-item) */
+.eb-never-btn-sm {
+	border: none;
+	border-radius: 5px;
+	background: color-mix(in srgb, var(--color-red) 10%, transparent);
+	color: var(--color-red);
+	font-size: 0.65em;
+	font-weight: 700;
+	padding: 2px 6px;
+	cursor: pointer;
+	white-space: nowrap;
+	flex-shrink: 0;
+	transition: background 0.15s, transform 0.1s;
+	line-height: 1.4;
+}
+
+.eb-never-btn-sm:hover {
+	background: var(--color-red);
+	color: #fff;
+}
+
+.eb-never-btn-sm:active {
+	transform: scale(0.92);
+}
+
+/* Completion animation */
+@keyframes eb-fade-shrink {
+	from {
+		opacity: 1;
+		transform: scaleY(1);
+		max-height: 40px;
+	}
+
+	to {
+		opacity: 0;
+		transform: scaleY(0);
+		max-height: 0;
+		padding: 0;
+		margin: 0;
+	}
+}
+
+.eb-done-animate {
+	animation: eb-fade-shrink 0.3s ease forwards;
+	overflow: hidden;
+}
+
+/* ── Day View ─────────────────────────────────────────────────────── */
+.eb-day-view {
+	flex: 1;
+	padding: 20px 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	overflow-y: auto;
+}
+
+.eb-day-section {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.eb-day-section-title {
+	font-size: 1em;
+	font-weight: 700;
+	margin: 0 0 6px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.eb-day-section-title-mod {
+	color: var(--color-blue);
+}
+
+.eb-day-section-title-review {
+	color: #f59e0b;
+}
+
+.eb-day-note-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 14px;
+	border-radius: 8px;
+	background: var(--background-secondary);
+	border-left: 3px solid transparent;
+	transition: background 0.12s;
+}
+
+.eb-day-note-item:hover {
+	background: var(--background-modifier-hover);
+}
+
+.eb-day-note-created {
+	border-left-color: var(--color-blue);
+}
+
+.eb-day-note-review {
+	border-left-color: #f59e0b;
+}
+
+.eb-day-note-overdue {
+	border-left-color: var(--color-red);
+}
+
+.eb-day-note-link {
+	flex: 1;
+	font-size: 0.95em;
+	color: var(--text-accent);
+	text-decoration: none;
+	cursor: pointer;
+	min-width: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.eb-day-note-link:hover {
+	text-decoration: underline;
+}
+
+.eb-overdue-label {
+	font-size: 0.72em;
+	font-weight: 700;
+	background: var(--color-red);
+	color: #fff;
+	border-radius: 4px;
+	padding: 1px 6px;
+	flex-shrink: 0;
+}
+
+.eb-day-note-actions {
+	display: flex;
+	gap: 6px;
+	flex-shrink: 0;
+}
+
+/* Larger done/never buttons in day view */
+.eb-day-view .eb-done-btn {
+	font-size: 0.8em;
+	padding: 4px 10px;
+}
+
+/* Stand-alone never button (day view) */
+.eb-never-btn {
+	border: none;
+	border-radius: 6px;
+	background: color-mix(in srgb, var(--color-red) 12%, transparent);
+	color: var(--color-red);
+	font-size: 0.8em;
+	font-weight: 700;
+	padding: 4px 10px;
+	cursor: pointer;
+	white-space: nowrap;
+	border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
+	transition: background 0.15s, transform 0.1s;
+}
+
+.eb-never-btn:hover {
+	background: var(--color-red);
+	color: #fff;
+}
+
+.eb-never-btn:active {
+	transform: scale(0.93);
+}
+
+.eb-empty-hint {
+	color: var(--text-muted);
+	font-size: 0.88em;
+	font-style: italic;
+	margin: 4px 0 0 4px;
+}
+
+/* ── Legend bar ───────────────────────────────────────────────────── */
+.eb-legend-bar {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	padding: 10px 24px 0;
+	flex-shrink: 0;
+}
+
+.eb-legend-item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.78em;
+	color: var(--text-muted);
+}
+
+.eb-dot-created-sm {
+	width: 10px;
+	height: 10px;
+	border-radius: 2px;
+	flex-shrink: 0;
+	border-left: 3px solid var(--color-blue);
+	background: color-mix(in srgb, var(--color-blue) 15%, transparent);
+}
+
+.eb-dot-review-sm {
+	width: 10px;
+	height: 10px;
+	border-radius: 2px;
+	flex-shrink: 0;
+	border-left: 3px solid #f59e0b;
+	background: color-mix(in srgb, #f59e0b 15%, transparent);
+}
+
+.eb-dot-overdue-sm {
+	width: 10px;
+	height: 10px;
+	border-radius: 2px;
+	flex-shrink: 0;
+	border-left: 3px solid var(--color-red);
+	background: color-mix(in srgb, var(--color-red) 15%, transparent);
+}
+
+.eb-legend-hint {
+	margin-left: auto;
+	font-size: 0.78em;
+	color: var(--text-faint);
+	font-style: italic;
+}
+
+/* ── Settings page ────────────────────────────────────────────────── */
+.eb-intervals-preview {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 8px;
+}
+
+.eb-interval-badge {
+	background: var(--background-secondary);
+	border-radius: 6px;
+	padding: 3px 10px;
+	font-size: 0.82em;
+	color: var(--text-muted);
+}
+
+/* ── Drag Select ──────────────────────────────────────────────────── */
+.eb-drag-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 9998;
+	cursor: crosshair;
+}
+
+.eb-select-rect {
+	position: fixed;
+	z-index: 9999;
+	border: 2px solid var(--interactive-accent);
+	background: color-mix(in srgb, var(--interactive-accent) 12%, transparent);
+	border-radius: 4px;
+	pointer-events: none;
+}
+
+.eb-note-selected {
+	outline: 2px solid var(--interactive-accent) !important;
+	outline-offset: 1px;
+	background: color-mix(in srgb, var(--interactive-accent) 14%, transparent) !important;
+	border-radius: 5px;
+}
+
+/* ── Selection Popup ──────────────────────────────────────────────── */
+.eb-selection-popup {
+	position: fixed;
+	z-index: 10000;
+	background: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 12px;
+	padding: 12px 16px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+	min-width: 230px;
+	max-width: 300px;
+	animation: eb-popup-in 0.15s ease;
+}
+
+@keyframes eb-popup-in {
+	from {
+		opacity: 0;
+		transform: scale(0.9) translateY(-4px);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+}
+
+.eb-popup-count {
+	font-size: 0.82em;
+	color: var(--text-muted);
+	margin: 0 0 10px;
+	line-height: 1.4;
+}
+
+.eb-popup-btn-row {
+	display: flex;
+	gap: 8px;
+}
+
+.eb-popup-btn {
+	flex: 1;
+	border: none;
+	border-radius: 8px;
+	padding: 8px 10px;
+	font-size: 0.85em;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background 0.15s, transform 0.1s;
+	white-space: nowrap;
+}
+
+.eb-popup-btn:active {
+	transform: scale(0.95);
+}
+
+.eb-popup-btn-done {
+	background: color-mix(in srgb, var(--color-green) 18%, transparent);
+	color: var(--color-green);
+	border: 1px solid color-mix(in srgb, var(--color-green) 40%, transparent);
+}
+
+.eb-popup-btn-done:hover {
+	background: var(--color-green);
+	color: #fff;
+}
+
+.eb-popup-btn-never {
+	background: color-mix(in srgb, var(--color-red) 12%, transparent);
+	color: var(--color-red);
+	border: 1px solid color-mix(in srgb, var(--color-red) 35%, transparent);
+}
+
+.eb-popup-btn-never:hover {
+	background: var(--color-red);
+	color: #fff;
+}
+
+/* ── Repetition Color Palette (1st–8th) ──────────────────────────── */
+/*
+   1st: blue        (#3b82f6)   — just learned / fresh
+   2nd: violet      (#8b5cf6)
+   3rd: cyan        (#06b6d4)
+   4th: teal/green  (#10b981)
+   5th: yellow-green (#84cc16)
+   6th: amber       (#f59e0b)
+   7th: orange      (#f97316)
+   8th: rose        (#f43f5e)   — nearly mastered, long interval
+   overdue: red (always overrides)
+*/
+
+/* Badge colors */
+.eb-rep-1 {
+	background: #3b82f6;
+}
+
+.eb-rep-2 {
+	background: #8b5cf6;
+}
+
+.eb-rep-3 {
+	background: #06b6d4;
+}
+
+.eb-rep-4 {
+	background: #10b981;
+}
+
+.eb-rep-5 {
+	background: #84cc16;
+}
+
+.eb-rep-6 {
+	background: #f59e0b;
+}
+
+.eb-rep-7 {
+	background: #f97316;
+}
+
+.eb-rep-8 {
+	background: #f43f5e;
+}
+
+/* Cell note item left-border: matches badge color */
+.eb-cell-note.eb-rep-item-1,
+.eb-day-note-item.eb-rep-item-1 {
+	border-left-color: #3b82f6;
+}
+
+.eb-cell-note.eb-rep-item-2,
+.eb-day-note-item.eb-rep-item-2 {
+	border-left-color: #8b5cf6;
+}
+
+.eb-cell-note.eb-rep-item-3,
+.eb-day-note-item.eb-rep-item-3 {
+	border-left-color: #06b6d4;
+}
+
+.eb-cell-note.eb-rep-item-4,
+.eb-day-note-item.eb-rep-item-4 {
+	border-left-color: #10b981;
+}
+
+.eb-cell-note.eb-rep-item-5,
+.eb-day-note-item.eb-rep-item-5 {
+	border-left-color: #84cc16;
+}
+
+.eb-cell-note.eb-rep-item-6,
+.eb-day-note-item.eb-rep-item-6 {
+	border-left-color: #f59e0b;
+}
+
+.eb-cell-note.eb-rep-item-7,
+.eb-day-note-item.eb-rep-item-7 {
+	border-left-color: #f97316;
+}
+
+.eb-cell-note.eb-rep-item-8,
+.eb-day-note-item.eb-rep-item-8 {
+	border-left-color: #f43f5e;
+}
+
+/* Overdue always forces red, regardless of repetition */
+.eb-rep-overdue {
+	background: #ef4444 !important;
+}
+
+.eb-note-overdue,
+.eb-day-note-overdue {
+	border-left-color: #ef4444 !important;
+}
